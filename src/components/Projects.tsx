@@ -13,7 +13,7 @@ interface ProjectItem {
   title: string;
   desc: string;
   techs: string[];
-  category: "all" | "react" | "html-css";
+  category: "all" | "react" | "html-css" | "nextjs";
   liveUrl: string;
   accent: string; // Gradient color for borders or mockups
   mockupSrc?: string;
@@ -116,6 +116,8 @@ export default function Projects() {
 
   const filteredProjects = projectsData.filter((project) => {
     if (filter === "all") return true;
+    // Show both React and Next.js projects when the React tab is active
+    if (filter === "react") return project.category === "react" || project.category === "nextjs";
     return project.category === filter;
   });
 
@@ -211,7 +213,7 @@ export default function Projects() {
 
                       {/* Floating Category tag */}
                       <span className="absolute right-3 top-3 rounded-md bg-slate-900/80 border border-white/[0.08] backdrop-blur-sm px-2.5 py-1 text-[10px] uppercase font-bold tracking-widest text-teal-400">
-                        {project.category === "react" ? "React App" : "Static Web"}
+                        {project.category === "react" || project.category === "nextjs" ? "React App" : "Static Web"}
                       </span>
                     </div>
 
